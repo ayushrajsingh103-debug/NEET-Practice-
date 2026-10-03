@@ -97,248 +97,249 @@
 </div>
 
 <script>
-  // QUESTIONS DATA EXTRACTED FROM YOUR PDF
-  const questionBank = [    // --- CHAPTER 2: MOTION IN A STRAIGHT LINE ---
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A man goes 20 m towards north, then 30 m towards east. His displacement is:[span_14](start_span)[span_14](end_span)",
-      options: ["37 m", "36 m", "40 m", "38 m"],
-      correctIndex: 1,
-      explanation: "Displacement = √(20² + 30²) = √(400 + 900) = √1300 ≈ 36.05 m. Option (b).[span_15](start_span)[span_15](end_span)[span_16](start_span)[span_16](end_span)"
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "An aeroplane flies 400 m north and 300 m south and then flies 1200 m upwards. The net displacement is:[span_17](start_span)[span_17](end_span)",
-      options: ["1200 m", "1300 m", "1400 m", "1500 m"],
-      correctIndex: 0,
-      explanation: "Net north-south displacement = 400 - 300 = 100 m[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span). Total displacement = √(100² + 1200²) = √(1450000) ≈ 1204 m ≈ 1200 m. Option (a)[span_20](start_span)[span_20](end_span)[span_21](start_span)[span_21](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "An athlete completes one round of a circular track of radius R in 80 sec. What will be his displacement at the end of 4 min 60 second?[span_22](start_span)[span_22](end_span)",
-      options: ["2πR", "3πR", "√2 R", "Zero"],
-      correctIndex: 2,
-      explanation: "Total time = 300 s. Number of rounds = 300/80 = 3.75 rounds. After 3.75 rounds, the position is perpendicular on the circle (quarter away): Displacement = √(R² + R²) = √2 R. Option (c)[span_23](start_span)[span_23](end_span)[span_24](start_span)[span_24](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "The displacement of a particle is given by x = (t - 2)² where x is in metre and t in second. The distance covered by the particle in first 4 seconds is:[span_25](start_span)[span_25](end_span)",
-      options: ["4 m", "8 m", "12 m", "16 m"],
-      correctIndex: 1,
-      explanation: "v = dx/dt = 2(t - 2). At t=0, v=-4; at t=2, v=0; at t=4, v=4[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span). Distance = area of the two triangles = 4 + 4 = 8 m. Option (b)[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A truck travels a distance A to B at a speed of 40 km/h and returns to A at a speed of 50 km/h. What is the average velocity of the whole journey?[span_30](start_span)[span_30](end_span)",
-      options: ["34.5 km/h", "Zero", "35 km/hr", "40 km/hr"],
-      correctIndex: 1,
-      explanation: "Since the truck returns to the starting point A, total displacement = 0[span_31](start_span)[span_31](end_span)[span_32](start_span)[span_32](end_span)[span_33](start_span)[span_33](end_span). Hence, average velocity = 0. Option (b)[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span)[span_36](start_span)[span_36](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A car travels half the distance with constant velocity of 40 km/h and the remaining half with a constant velocity of 80 km/h. The average velocity of the car is:[span_37](start_span)[span_37](end_span)",
-      options: ["32 km/hr", "53.3 km/hr", "43.2 km/hr", "42 km/hr"],
-      correctIndex: 1,
-      explanation: "v_avg = 2v₁v₂ / (v₁ + v₂) = 2(40)(80) / (40 + 80) = 6400 / 120 = 53.3 km/h. Option (b)[span_38](start_span)[span_38](end_span)[span_39](start_span)[span_39](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A particle is moving eastward with a velocity of 5 m/s. In 10 seconds, the velocity changes to 5 m/s northward. The average acceleration in this time is:[span_40](start_span)[span_40](end_span)",
-      options: ["Zero", "1/2 m/s² (towards north-east)", "1/√2 m/s² (towards north-east)", "1/√2 m/s² (towards north-west)"],
-      correctIndex: 3,
-      explanation: "|Δv| = √(5² + 5²) = 5√2 m/s pointing north-west[span_41](start_span)[span_41](end_span). a_avg = (5√2)/10 = 1/√2 m/s² (towards north-west). Option (d)[span_42](start_span)[span_42](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A ball thrown vertically upward with a speed of 19.6 m/s from the top of a tower returns to the earth in 6 second. What is the height of the tower?[span_43](start_span)[span_43](end_span)",
-      options: ["40 m", "58.8 m", "50 m", "70 m"],
-      correctIndex: 1,
-      explanation: "Using S = ut + ½gt² with upward positive: -h = 19.6(6) - ½(9.8)(6)² = 117.6 - 176.4 = -58.8 m => h = 58.8 m. Option (b)[span_44](start_span)[span_44](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A car moving with a velocity of 10 m/s can be stopped by constant force F in 20 m. If the velocity is 30 m/s, it can be stopped in:[span_45](start_span)[span_45](end_span)",
-      options: ["100 m", "90 m", "180 m", "160 m"],
-      correctIndex: 2,
-      explanation: "Stopping distance s ∝ u²[span_46](start_span)[span_46](end_span). Since speed triples (30/10 = 3), distance increases by 3² = 9 times. s = 20 × 9 = 180 m. Option (c)[span_47](start_span)[span_47](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A splash is heard 3 seconds after a stone is dropped into a well of depth 20 m. The velocity of sound is (g = 10 m/s²):[span_48](start_span)[span_48](end_span)[span_49](start_span)[span_49](end_span)",
-      options: ["18 m/s", "28 m/s", "20 m/s", "19 m/s"],
-      correctIndex: 2,
-      explanation: "Time to fall t₁ = √(2h/g) = √(40/10) = 2 s[span_50](start_span)[span_50](end_span). Time for sound to return = 3 - 2 = 1 s[span_51](start_span)[span_51](end_span). v_sound = 20 m / 1 s = 20 m/s. Option (c)[span_52](start_span)[span_52](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "The numerical ratio of distance to displacement is:[span_53](start_span)[span_53](end_span)",
-      options: ["Always equal to one", "Always less than one", "Always greater than one", "Equal to or more than one"],
-      correctIndex: 3,
-      explanation: "Distance is always greater than or equal to the magnitude of displacement[span_54](start_span)[span_54](end_span). Hence, Distance / Displacement ≥ 1. Option (d)[span_55](start_span)[span_55](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A bullet fired into a fixed target loses half of its velocity after penetrating 4 cm. How much further it will penetrate before coming to rest?[span_56](start_span)[span_56](end_span)[span_57](start_span)[span_57](end_span)",
-      options: ["0.2 cm", "5 cm", "3 cm", "1.33 cm"],
-      correctIndex: 3,
-      explanation: "Further distance s' = s / (n² - 1) = 4 / (2² - 1) = 4/3 = 1.33 cm. Option (d)[span_58](start_span)[span_58](end_span)[span_59](start_span)[span_59](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "The x and y coordinates of a particle at any time are x = 5t - 2t² and y = 10t. The acceleration of the particle at t = 2 s is: [NEET 2017][span_60](start_span)[span_60](end_span)",
-      options: ["5 m/s²", "-4 m/s²", "-8 m/s²", "0"],
-      correctIndex: 1,
-      explanation: "v_x = 5 - 4t, a_x = -4 m/s²; v_y = 10, a_y = 0[span_61](start_span)[span_61](end_span). Net acceleration a = -4 m/s². Option (b)[span_62](start_span)[span_62](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "Two cars P and Q start from a point at the same time and positions are X_p(t) = at + bt² and X_q(t) = ft - t². At what time do they have the same velocity? [NEET 2016][span_63](start_span)[span_63](end_span)",
-      options: ["(a + f) / 2(1 + b)", "(f - a) / 2(1 + b)", "(a - f) / (1 + b)", "(a + 1) / 2(b - 1)"],
-      correctIndex: 1,
-      explanation: "v_p = a + 2bt, v_q = f - 2t[span_64](start_span)[span_64](end_span). Equating them: a + 2bt = f - 2t => 2t(1 + b) = f - a => t = (f - a) / 2(1 + b). Option (b)[span_65](start_span)[span_65](end_span)."
-    },
-    {
-      subject: "Physics",
-      chapter: "Motion in a Straight Line",
-      question: "A stone falls freely under gravity. It covers distances h₁, h₂, and h₃ in the first 5 s, the next 5 s, and the next 5 s respectively. The relation between them is: [NEET 2013][span_66](start_span)[span_66](end_span)",
-      options: ["h₁ = h₂ = h₃", "h₁ = 2h₂ = 3h₃", "h₁ = h₂/3 = h₃/5", "h₂ = 3h₁ and h₃ = 3h₂"],
-      correctIndex: 2,
-      explanation: "Distances fallen in equal successive time intervals from rest follow Galileo's odd numbers ratio 1 : 3 : 5[span_67](start_span)[span_67](end_span)[span_68](start_span)[span_68](end_span). Thus h₁ : h₂ : h₃ = 1 : 3 : 5 => h₁ = h₂/3 = h₃/5. Option (c)[span_69](start_span)[span_69](end_span)."
-    },
-    
+  const questionBank = [
+    // --- CHAPTER 1: UNITS AND MEASUREMENTS ---
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "The dimensions of magnetic moment are:[span_11](start_span)[span_11](end_span)",
+      question: "The dimensions of magnetic moment are:[span_25](start_span)[span_25](end_span)",
       options: ["L²A⁻¹", "L²A¹", "LA²", "L²A⁻³"],
       correctIndex: 1,
-      explanation: "Magnetic moment = Current × Area = [A] × [L²] = [L²A¹]. Option (b).[span_12](start_span)[span_12](end_span)"
+      explanation: "Magnetic moment = Current × Area = [A] × [L²] = [L²A¹]. Option (b).[span_26](start_span)[span_26](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "The velocity 'V' of a particle is given in terms of time t as V = at + b/(t + C). The dimensions of a, b, C are:[span_13](start_span)[span_13](end_span)",
+      question: "The velocity 'V' of a particle is given in terms of time t as V = at + b/(t + C). The dimensions of a, b, C are:[span_27](start_span)[span_27](end_span)",
       options: ["L², ML, T⁻²", "LT², LT, L", "LT⁻², L, T", "L, LT, T²"],
       correctIndex: 2,
-      explanation: "Since C is added to t, [C] = [T]. Also b/(t+C) = V implies [b] = [V][t] = L. From V = at, [a] = [V]/[t] = LT⁻². Option (c).[span_14](start_span)[span_14](end_span)"
+      explanation: "Since C is added to t, [C] = [T]. Also b/(t+C) = V implies [b] = [V][t] = L. From V = at, [a] = [V]/[t] = LT⁻². Option (c).[span_28](start_span)[span_28](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "Which of the following pairs of physical quantities does not have the same dimensional formula?[span_15](start_span)[span_15](end_span)",
+      question: "Which of the following pairs of physical quantities does not have the same dimensional formula?[span_29](start_span)[span_29](end_span)",
       options: ["Work and torque", "Angular momentum and Planck's constant", "Tension and surface tension", "Impulse and linear momentum"],
       correctIndex: 2,
-      explanation: "Tension is force [MLT⁻²], whereas Surface tension is Force/Length [ML⁰T⁻²]. Option (c).[span_16](start_span)[span_16](end_span)"
+      explanation: "Tension is force [MLT⁻²], whereas Surface tension is Force/Length [ML⁰T⁻²]. Option (c).[span_30](start_span)[span_30](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "Surface tension has the same dimensions as that of:[span_17](start_span)[span_17](end_span)",
+      question: "Surface tension has the same dimensions as that of:[span_31](start_span)[span_31](end_span)",
       options: ["Coefficient of viscosity", "Impulse", "Momentum", "Spring constant"],
       correctIndex: 3,
-      explanation: "Both surface tension and spring constant have the dimension [MT⁻²]. Option (d).[span_18](start_span)[span_18](end_span)"
+      explanation: "Both surface tension and spring constant have the dimension [MT⁻²]. Option (d).[span_32](start_span)[span_32](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "Which of the following is not a unit of time?[span_19](start_span)[span_19](end_span)",
+      question: "Which of the following is not a unit of time?[span_33](start_span)[span_33](end_span)",
       options: ["Second", "Minute", "Year", "Light year"],
       correctIndex: 3,
-      explanation: "Light year is a unit of distance (the distance light travels in one year in vacuum). Option (d).[span_20](start_span)[span_20](end_span)"
+      explanation: "Light year is a unit of distance (the distance light travels in one year in vacuum). Option (d).[span_34](start_span)[span_34](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "The number of significant figures in 0.06900 is:[span_21](start_span)[span_21](end_span)",
+      question: "The number of significant figures in 0.06900 is:[span_35](start_span)[span_35](end_span)",
       options: ["5", "4", "2", "3"],
       correctIndex: 1,
-      explanation: "Leading zeros before 6 are not significant, but trailing zeros after the decimal point are significant. Total = 4. Option (b).[span_22](start_span)[span_22](end_span)"
+      explanation: "Leading zeros before 6 are not significant, but trailing zeros after the decimal point are significant. Total = 4. Option (b).[span_36](start_span)[span_36](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "If voltage V = (100 ± 5) V and current I = (10 ± 0.2) A, the percentage error in resistance R is:[span_23](start_span)[span_23](end_span)",
+      question: "If voltage V = (100 ± 5) V and current I = (10 ± 0.2) A, the percentage error in resistance R is:[span_37](start_span)[span_37](end_span)",
       options: ["5.2%", "25%", "7%", "10%"],
       correctIndex: 2,
-      explanation: "R = V/I. % error = (ΔV/V * 100) + (ΔI/I * 100) = (5/100 * 100) + (0.2/10 * 100) = 5% + 2% = 7%. Option (c).[span_24](start_span)[span_24](end_span)"
+      explanation: "R = V/I. % error = (ΔV/V * 100) + (ΔI/I * 100) = (5/100 * 100) + (0.2/10 * 100) = 5% + 2% = 7%. Option (c).[span_38](start_span)[span_38](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "In a vernier caliper, one main scale division is x cm and n divisions of the vernier scale coincide with (n-1) divisions of the main scale. The least count (in cm) is:[span_25](start_span)[span_25](end_span)",
+      question: "In a vernier caliper, one main scale division is x cm and n divisions of the vernier scale coincide with (n-1) divisions of the main scale. The least count (in cm) is:[span_39](start_span)[span_39](end_span)",
       options: ["((n-1)/n)x", "(nx/(n-1))", "x/n", "(x/(n-1))"],
       correctIndex: 2,
-      explanation: "Least Count = 1 MSD - 1 VSD = x - ((n-1)/n)x = x/n cm. Option (c).[span_26](start_span)[span_26](end_span)"
+      explanation: "Least Count = 1 MSD - 1 VSD = x - ((n-1)/n)x = x/n cm. Option (c).[span_40](start_span)[span_40](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "If E and G respectively denote energy and gravitational constant, then E/G has the dimensions of: [NEET 2021][span_27](start_span)[span_27](end_span)",
+      question: "If E and G respectively denote energy and gravitational constant, then E/G has the dimensions of: [NEET 2021][span_41](start_span)[span_41](end_span)",
       options: ["[M][L⁻¹][T⁻¹]", "[M][L⁰][T⁰]", "[M²][L⁻²][T⁻¹]", "[M²][L⁻¹][T⁰]"],
       correctIndex: 3,
-      explanation: "[E] = ML²T⁻² and [G] = M⁻¹L³T⁻². Thus [E/G] = [ML²T⁻²] / [M⁻¹L³T⁻²] = [M²L⁻¹T⁰]. Option (d).[span_28](start_span)[span_28](end_span)"
+      explanation: "[E] = ML²T⁻² and [G] = M⁻¹L³T⁻². Thus [E/G] = [ML²T⁻²] / [M⁻¹L³T⁻²] = [M²L⁻¹T⁰]. Option (d).[span_42](start_span)[span_42](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "A screw gauge has least count of 0.01 mm and there are 50 divisions in its circular scale. The pitch of the screw gauge is: [NEET 2020][span_29](start_span)[span_29](end_span)",
+      question: "A screw gauge has least count of 0.01 mm and there are 50 divisions in its circular scale. The pitch of the screw gauge is: [NEET 2020][span_43](start_span)[span_43](end_span)",
       options: ["0.25 mm", "0.5 mm", "1.0 mm", "0.01 mm"],
       correctIndex: 1,
-      explanation: "Pitch = Least count × Number of divisions = 0.01 mm × 50 = 0.5 mm. Option (b).[span_30](start_span)[span_30](end_span)"
+      explanation: "Pitch = Least count × Number of divisions = 0.01 mm × 50 = 0.5 mm. Option (b).[span_44](start_span)[span_44](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "Taking into account significant figures, what is the value of 9.99 m - 0.0099 m? [NEET 2020][span_31](start_span)[span_31](end_span)",
+      question: "Taking into account significant figures, what is the value of 9.99 m - 0.0099 m? [NEET 2020][span_45](start_span)[span_45](end_span)",
       options: ["9.98 m", "9.980 m", "9.9 m", "9.9801 m"],
       correctIndex: 0,
-      explanation: "9.99 has 2 decimal places, so the result must be rounded off to 2 decimal places: 9.98 m. Option (a).[span_32](start_span)[span_32](end_span)"
+      explanation: "9.99 has 2 decimal places, so the result must be rounded off to 2 decimal places: 9.98 m. Option (a).[span_46](start_span)[span_46](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "Dimensions of stress are: [NEET 2020][span_33](start_span)[span_33](end_span)",
+      question: "Dimensions of stress are: [NEET 2020][span_47](start_span)[span_47](end_span)",
       options: ["[ML²T⁻²]", "[ML⁰T⁻²]", ["[ML⁻¹T⁻²]", "[MLT⁻²]"],
       correctIndex: 2,
-      explanation: "Stress = Force / Area = [MLT⁻²] / [L²] = [ML⁻¹T⁻²]. Option (c).[span_34](start_span)[span_34](end_span)"
+      explanation: "Stress = Force / Area = [MLT⁻²] / [L²] = [ML⁻¹T⁻²]. Option (c).[span_48](start_span)[span_48](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "The angle of 1' (minute of arc) in radian is nearly equal to: [NEET 2020 Re-NEET][span_35](start_span)[span_35](end_span)",
+      question: "The angle of 1' (minute of arc) in radian is nearly equal to: [NEET 2020 Re-NEET][span_49](start_span)[span_49](end_span)",
       options: ["4.85 × 10⁻⁴ rad", "4.80 × 10⁻⁶ rad", "1.75 × 10⁻² rad", "2.91 × 10⁻⁴ rad"],
       correctIndex: 3,
-      explanation: "1' = (1/60)° = (1/60) × (π/180) rad = 2.91 × 10⁻⁴ rad. Option (d).[span_36](start_span)[span_36](end_span)"
+      explanation: "1' = (1/60)° = (1/60) × (π/180) rad = 2.91 × 10⁻⁴ rad. Option (d).[span_50](start_span)[span_50](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "Dimensions of resistance in an electrical circuit, in terms of M, L, T, and current I, would be:[span_37](start_span)[span_37](end_span)",
+      question: "Dimensions of resistance in an electrical circuit, in terms of M, L, T, and current I, would be:[span_51](start_span)[span_51](end_span)",
       options: ["[ML²T⁻²]", "[ML²T⁻¹I⁻¹]", ["[ML²T⁻³I⁻²]", "[ML²T⁻³I⁻¹]"],
       correctIndex: 2,
-      explanation: "V = W/q = [ML²T⁻²]/[It] = [ML²T⁻³I⁻¹]. R = V/I = [ML²T⁻³I⁻²]. Option (c).[span_38](start_span)[span_38](end_span)"
+      explanation: "V = W/q = [ML²T⁻²]/[It] = [ML²T⁻³I⁻¹]. R = V/I = [ML²T⁻³I⁻²]. Option (c).[span_52](start_span)[span_52](end_span)"
     },
     {
       subject: "Physics",
       chapter: "Units and Measurements",
-      question: "The dimensions of (μ₀ε₀)⁻¹/² are: [NEET 2012 Mains][span_39](start_span)[span_39](end_span)",
+      question: "The dimensions of (μ₀ε₀)⁻¹/² are: [NEET 2012 Mains][span_53](start_span)[span_53](end_span)",
       options: ["[L¹/²T⁻¹/²]", "[L⁻¹T]", "[LT⁻¹]", "[L¹/²T¹/²]"],
       correctIndex: 2,
-      explanation: "(μ₀ε₀)⁻¹/² represents the speed of light c, which has dimensions [LT⁻¹]. Option (c).[span_40](start_span)[span_40](end_span)"
+      explanation: "(μ₀ε₀)⁻¹/² represents the speed of light c, which has dimensions [LT⁻¹]. Option (c).[span_54](start_span)[span_54](end_span)"
+    },
+
+    // --- CHAPTER 2: MOTION IN A STRAIGHT LINE ---
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A man goes 20 m towards north, then 30 m towards east. His displacement is:[span_55](start_span)[span_55](end_span)",
+      options: ["37 m", "36 m", "40 m", "38 m"],
+      correctIndex: 1,
+      explanation: "Displacement = √(20² + 30²) = √(400 + 900) = √1300 ≈ 36.05 m. Option (b).[span_56](start_span)[span_56](end_span)[span_57](start_span)[span_57](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "An aeroplane flies 400 m north and 300 m south and then flies 1200 m upwards. The net displacement is:[span_58](start_span)[span_58](end_span)",
+      options: ["1200 m", "1300 m", "1400 m", "1500 m"],
+      correctIndex: 0,
+      explanation: "Net north-south displacement = 400 - 300 = 100 m[span_59](start_span)[span_59](end_span)[span_60](start_span)[span_60](end_span). Total displacement = √(100² + 1200²) ≈ 1204 m ≈ 1200 m. Option (a)[span_61](start_span)[span_61](end_span)[span_62](start_span)[span_62](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "An athlete completes one round of a circular track of radius R in 80 sec. What will be his displacement at the end of 4 min 60 second?[span_63](start_span)[span_63](end_span)",
+      options: ["2πR", "3πR", "√2 R", "Zero"],
+      correctIndex: 2,
+      explanation: "Total time = 300 s. Rounds = 300/80 = 3.75 rounds. After 3.75 rounds, the displacement is √(R² + R²) = √2 R. Option (c)[span_64](start_span)[span_64](end_span)[span_65](start_span)[span_65](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "The displacement of a particle is given by x = (t - 2)² where x is in metre and t in second. The distance covered by the particle in first 4 seconds is:[span_66](start_span)[span_66](end_span)",
+      options: ["4 m", "8 m", "12 m", "16 m"],
+      correctIndex: 1,
+      explanation: "v = dx/dt = 2(t - 2). At t=0, v=-4; at t=2, v=0; at t=4, v=4[span_67](start_span)[span_67](end_span)[span_68](start_span)[span_68](end_span). Distance = area of the two triangles = 4 + 4 = 8 m. Option (b)[span_69](start_span)[span_69](end_span)[span_70](start_span)[span_70](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A truck travels a distance A to B at a speed of 40 km/h and returns to A at a speed of 50 km/h. What is the average velocity of the whole journey?[span_71](start_span)[span_71](end_span)",
+      options: ["34.5 km/h", "Zero", "35 km/hr", "40 km/hr"],
+      correctIndex: 1,
+      explanation: "Since the truck returns to the starting point A, total displacement = 0[span_72](start_span)[span_72](end_span)[span_73](start_span)[span_73](end_span)[span_74](start_span)[span_74](end_span). Hence, average velocity = 0. Option (b)[span_75](start_span)[span_75](end_span)[span_76](start_span)[span_76](end_span)[span_77](start_span)[span_77](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A car travels half the distance with constant velocity of 40 km/h and the remaining half with a constant velocity of 80 km/h. The average velocity of the car is:[span_78](start_span)[span_78](end_span)",
+      options: ["32 km/hr", "53.3 km/hr", "43.2 km/hr", "42 km/hr"],
+      correctIndex: 1,
+      explanation: "v_avg = 2v₁v₂ / (v₁ + v₂) = 2(40)(80) / (40 + 80) = 6400 / 120 = 53.3 km/h. Option (b)[span_79](start_span)[span_79](end_span)[span_80](start_span)[span_80](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A particle is moving eastward with a velocity of 5 m/s. In 10 seconds, the velocity changes to 5 m/s northward. The average acceleration in this time is:[span_81](start_span)[span_81](end_span)",
+      options: ["Zero", "1/2 m/s² (towards north-east)", "1/√2 m/s² (towards north-east)", "1/√2 m/s² (towards north-west)"],
+      correctIndex: 3,
+      explanation: "|Δv| = √(5² + 5²) = 5√2 m/s pointing north-west[span_82](start_span)[span_82](end_span). a_avg = (5√2)/10 = 1/√2 m/s² (towards north-west). Option (d)[span_83](start_span)[span_83](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A ball thrown vertically upward with a speed of 19.6 m/s from the top of a tower returns to the earth in 6 second. What is the height of the tower?[span_84](start_span)[span_84](end_span)",
+      options: ["40 m", "58.8 m", "50 m", "70 m"],
+      correctIndex: 1,
+      explanation: "Using S = ut + ½gt²: -h = 19.6(6) - ½(9.8)(6)² = 117.6 - 176.4 = -58.8 m => h = 58.8 m. Option (b)[span_85](start_span)[span_85](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A car moving with a velocity of 10 m/s can be stopped by constant force F in 20 m. If the velocity is 30 m/s, it can be stopped in:[span_86](start_span)[span_86](end_span)",
+      options: ["100 m", "90 m", "180 m", "160 m"],
+      correctIndex: 2,
+      explanation: "Stopping distance s ∝ u²[span_87](start_span)[span_87](end_span). Since speed triples (30/10 = 3), distance increases by 3² = 9 times. s = 20 × 9 = 180 m. Option (c)[span_88](start_span)[span_88](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A splash is heard 3 seconds after a stone is dropped into a well of depth 20 m. The velocity of sound is (g = 10 m/s²):[span_89](start_span)[span_89](end_span)[span_90](start_span)[span_90](end_span)",
+      options: ["18 m/s", "28 m/s", "20 m/s", "19 m/s"],
+      correctIndex: 2,
+      explanation: "Time to fall t₁ = √(2h/g) = √(40/10) = 2 s[span_91](start_span)[span_91](end_span). Time for sound to return = 3 - 2 = 1 s[span_92](start_span)[span_92](end_span). v_sound = 20 m / 1 s = 20 m/s. Option (c)[span_93](start_span)[span_93](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "The numerical ratio of distance to displacement is:[span_94](start_span)[span_94](end_span)",
+      options: ["Always equal to one", "Always less than one", "Always greater than one", "Equal to or more than one"],
+      correctIndex: 3,
+      explanation: "Distance is always greater than or equal to displacement[span_95](start_span)[span_95](end_span). Hence, Distance / Displacement ≥ 1. Option (d)[span_96](start_span)[span_96](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A bullet fired into a fixed target loses half of its velocity after penetrating 4 cm. How much further it will penetrate before coming to rest?[span_97](start_span)[span_97](end_span)[span_98](start_span)[span_98](end_span)",
+      options: ["0.2 cm", "5 cm", "3 cm", "1.33 cm"],
+      correctIndex: 3,
+      explanation: "Further distance s' = s / (n² - 1) = 4 / (2² - 1) = 4/3 = 1.33 cm. Option (d)[span_99](start_span)[span_99](end_span)[span_100](start_span)[span_100](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "The x and y coordinates of a particle at any time are x = 5t - 2t² and y = 10t. The acceleration of the particle at t = 2 s is: [NEET 2017][span_101](start_span)[span_101](end_span)",
+      options: ["5 m/s²", "-4 m/s²", "-8 m/s²", "0"],
+      correctIndex: 1,
+      explanation: "v_x = 5 - 4t, a_x = -4 m/s²; v_y = 10, a_y = 0[span_102](start_span)[span_102](end_span). Net acceleration a = -4 m/s². Option (b)[span_103](start_span)[span_103](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "Two cars P and Q start from a point at the same time and positions are X_p(t) = at + bt² and X_q(t) = ft - t². At what time do they have the same velocity? [NEET 2016][span_104](start_span)[span_104](end_span)",
+      options: ["(a + f) / 2(1 + b)", "(f - a) / 2(1 + b)", "(a - f) / (1 + b)", "(a + 1) / 2(b - 1)"],
+      correctIndex: 1,
+      explanation: "v_p = a + 2bt, v_q = f - 2t[span_105](start_span)[span_105](end_span). a + 2bt = f - 2t => 2t(1 + b) = f - a => t = (f - a) / 2(1 + b). Option (b)[span_106](start_span)[span_106](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A stone falls freely under gravity. It covers distances h₁, h₂, and h₃ in the first 5 s, the next 5 s, and the next 5 s respectively. The relation between them is: [NEET 2013][span_107](start_span)[span_107](end_span)",
+      options: ["h₁ = h₂ = h₃", "h₁ = 2h₂ = 3h₃", "h₁ = h₂/3 = h₃/5", "h₂ = 3h₁ and h₃ = 3h₂"],
+      correctIndex: 2,
+      explanation: "Distances fallen in equal successive time intervals follow Galileo's odd numbers ratio 1 : 3 : 5[span_108](start_span)[span_108](end_span)[span_109](start_span)[span_109](end_span). Thus h₁ : h₂ : h₃ = 1 : 3 : 5 => h₁ = h₂/3 = h₃/5. Option (c)[span_110](start_span)[span_110](end_span)."
     }
   ];
 
@@ -346,10 +347,10 @@
   let currentIdx = 0;
   let score = 0;
 
-  // Initialize Subject Selector
   function init() {
     const subjects = [...new Set(questionBank.map(item => item.subject))];
     const subDrop = document.getElementById("subDrop");
+    subDrop.innerHTML = '<option value="">-- Choose Subject --</option>';
     subjects.forEach(sub => {
       const opt = document.createElement("option");
       opt.value = sub;
@@ -466,4 +467,3 @@
 </script>
 </body>
 </html>
-

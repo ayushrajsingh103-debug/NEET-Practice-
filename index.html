@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEET Practice Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: #0f172a; color: #f8fafc; min-height: 100vh; padding: 1.5rem 1rem; display: flex; justify-content: center; }
+    .container { max-width: 680px; width: 100%; }
+
+    /* Card styling */
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 1.75rem; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; text-align: center; color: #38bdf8; }
+    p.subtitle { text-align: center; color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    /* Form selectors */
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; color: #cbd5e1; }
+    select { width: 100%; padding: 0.85rem; border: 1.5px solid #475569; border-radius: 8px; font-size: 1rem; background: #0f172a; color: #f8fafc; outline: none; }
+    select:focus { border-color: #38bdf8; }
+
+    /* Buttons */
+    .primary-btn { width: 100%; padding: 0.85rem; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .primary-btn:hover { background: #1d4ed8; }
+    .primary-btn:disabled { background: #475569; cursor: not-allowed; }
+
+    /* Quiz Screen */
+    .quiz-view { display: none; }
+    .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+    .back-btn { background: #334155; border: none; color: #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .back-btn:hover { background: #475569; }
+    .badge { background: #0369a1; color: #e0f2fe; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+    .q-text { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 1.5rem; line-height: 1.5; color: #f1f5f9; white-space: pre-line; }
+    .options-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    
+    .opt-btn { padding: 0.9rem 1rem; border: 1.5px solid #334155; background: #0f172a; color: #e2e8f0; border-radius: 8px; text-align: left; cursor: pointer; font-size: 0.95rem; transition: 0.2s; line-height: 1.4; }
+    .opt-btn:hover:not(:disabled) { border-color: #64748b; background: #1e293b; }
+
+    /* Correct & Incorrect feedback */
+    .opt-btn.correct { background: #064e3b !important; border-color: #10b981 !important; color: #a7f3d0 !important; font-weight: 600; }
+    .opt-btn.wrong { background: #7f1d1d !important; border-color: #ef4444 !important; color: #fecaca !important; font-weight: 600; }
+    .opt-btn:disabled { cursor: default; }
+
+    .exp-box { margin-top: 1.25rem; padding: 1rem; border-radius: 8px; font-size: 0.9rem; line-height: 1.4; display: none; }
+    .exp-box.show { display: block; }
+    .exp-box.correct { background: #064e3b; border-left: 4px solid #10b981; color: #a7f3d0; }
+    .exp-box.wrong { background: #7f1d1d; border-left: 4px solid #ef4444; color: #fecaca; }
+
+    .footer-bar { margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 1. Chapter Selection Screen -->
+  <div class="card" id="selectorCard">
+    <h1>NEET Practice Engine</h1>
+    <p class="subtitle">Select your Subject and Chapter to begin drilling questions.</p>
+
+    <div class="form-group">
+      <label for="subDrop">Select Subject</label>
+      <select id="subDrop" onchange="handleSubjectChange()">
+        <option value="">-- Choose Subject --</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="chapDrop">Select Chapter</label>
+      <select id="chapDrop" disabled onchange="handleChapterChange()">
+        <option value="">-- Choose Chapter --</option>
+      </select>
+    </div>
+
+    <button class="primary-btn" id="startBtn" disabled onclick="startPractice()">Start Practice</button>
+  </div>
+
+  <!-- 2. Question Practice Screen -->
+  <div class="card quiz-view" id="practiceCard">
+    <div class="header-bar">
+      <button class="back-btn" onclick="backToSelection()">← Switch Chapter</button>
+      <span class="badge" id="chapterBadge">Physics</span>
+    </div>
+
+    <div style="font-size: 0.85rem; color: #94a3b8;" id="counterText">Question 1 of 10</div>
+    <div class="q-text" id="questionText">Question body</div>
+    <div class="options-grid" id="optionsBox"></div>
+
+    <div class="exp-box" id="explanationBox"></div>
+
+    <div class="footer-bar">
+      <div id="scoreCounter" style="font-size: 0.85rem; color: #94a3b8;">Score: 0</div>
+      <button class="primary-btn" id="nextBtn" style="display:none; width:auto; padding: 0.6rem 1.4rem;" onclick="goNext()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // QUESTIONS DATA EXTRACTED FROM YOUR PDF
+  const questionBank = [
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "The dimensions of magnetic moment are:[span_11](start_span)[span_11](end_span)",
+      options: ["L²A⁻¹", "L²A¹", "LA²", "L²A⁻³"],
+      correctIndex: 1,
+      explanation: "Magnetic moment = Current × Area = [A] × [L²] = [L²A¹]. Option (b).[span_12](start_span)[span_12](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "The velocity 'V' of a particle is given in terms of time t as V = at + b/(t + C). The dimensions of a, b, C are:[span_13](start_span)[span_13](end_span)",
+      options: ["L², ML, T⁻²", "LT², LT, L", "LT⁻², L, T", "L, LT, T²"],
+      correctIndex: 2,
+      explanation: "Since C is added to t, [C] = [T]. Also b/(t+C) = V implies [b] = [V][t] = L. From V = at, [a] = [V]/[t] = LT⁻². Option (c).[span_14](start_span)[span_14](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "Which of the following pairs of physical quantities does not have the same dimensional formula?[span_15](start_span)[span_15](end_span)",
+      options: ["Work and torque", "Angular momentum and Planck's constant", "Tension and surface tension", "Impulse and linear momentum"],
+      correctIndex: 2,
+      explanation: "Tension is force [MLT⁻²], whereas Surface tension is Force/Length [ML⁰T⁻²]. Option (c).[span_16](start_span)[span_16](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "Surface tension has the same dimensions as that of:[span_17](start_span)[span_17](end_span)",
+      options: ["Coefficient of viscosity", "Impulse", "Momentum", "Spring constant"],
+      correctIndex: 3,
+      explanation: "Both surface tension and spring constant have the dimension [MT⁻²]. Option (d).[span_18](start_span)[span_18](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "Which of the following is not a unit of time?[span_19](start_span)[span_19](end_span)",
+      options: ["Second", "Minute", "Year", "Light year"],
+      correctIndex: 3,
+      explanation: "Light year is a unit of distance (the distance light travels in one year in vacuum). Option (d).[span_20](start_span)[span_20](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "The number of significant figures in 0.06900 is:[span_21](start_span)[span_21](end_span)",
+      options: ["5", "4", "2", "3"],
+      correctIndex: 1,
+      explanation: "Leading zeros before 6 are not significant, but trailing zeros after the decimal point are significant. Total = 4. Option (b).[span_22](start_span)[span_22](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "If voltage V = (100 ± 5) V and current I = (10 ± 0.2) A, the percentage error in resistance R is:[span_23](start_span)[span_23](end_span)",
+      options: ["5.2%", "25%", "7%", "10%"],
+      correctIndex: 2,
+      explanation: "R = V/I. % error = (ΔV/V * 100) + (ΔI/I * 100) = (5/100 * 100) + (0.2/10 * 100) = 5% + 2% = 7%. Option (c).[span_24](start_span)[span_24](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "In a vernier caliper, one main scale division is x cm and n divisions of the vernier scale coincide with (n-1) divisions of the main scale. The least count (in cm) is:[span_25](start_span)[span_25](end_span)",
+      options: ["((n-1)/n)x", "(nx/(n-1))", "x/n", "(x/(n-1))"],
+      correctIndex: 2,
+      explanation: "Least Count = 1 MSD - 1 VSD = x - ((n-1)/n)x = x/n cm. Option (c).[span_26](start_span)[span_26](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "If E and G respectively denote energy and gravitational constant, then E/G has the dimensions of: [NEET 2021][span_27](start_span)[span_27](end_span)",
+      options: ["[M][L⁻¹][T⁻¹]", "[M][L⁰][T⁰]", "[M²][L⁻²][T⁻¹]", "[M²][L⁻¹][T⁰]"],
+      correctIndex: 3,
+      explanation: "[E] = ML²T⁻² and [G] = M⁻¹L³T⁻². Thus [E/G] = [ML²T⁻²] / [M⁻¹L³T⁻²] = [M²L⁻¹T⁰]. Option (d).[span_28](start_span)[span_28](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "A screw gauge has least count of 0.01 mm and there are 50 divisions in its circular scale. The pitch of the screw gauge is: [NEET 2020][span_29](start_span)[span_29](end_span)",
+      options: ["0.25 mm", "0.5 mm", "1.0 mm", "0.01 mm"],
+      correctIndex: 1,
+      explanation: "Pitch = Least count × Number of divisions = 0.01 mm × 50 = 0.5 mm. Option (b).[span_30](start_span)[span_30](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "Taking into account significant figures, what is the value of 9.99 m - 0.0099 m? [NEET 2020][span_31](start_span)[span_31](end_span)",
+      options: ["9.98 m", "9.980 m", "9.9 m", "9.9801 m"],
+      correctIndex: 0,
+      explanation: "9.99 has 2 decimal places, so the result must be rounded off to 2 decimal places: 9.98 m. Option (a).[span_32](start_span)[span_32](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "Dimensions of stress are: [NEET 2020][span_33](start_span)[span_33](end_span)",
+      options: ["[ML²T⁻²]", "[ML⁰T⁻²]", ["[ML⁻¹T⁻²]", "[MLT⁻²]"],
+      correctIndex: 2,
+      explanation: "Stress = Force / Area = [MLT⁻²] / [L²] = [ML⁻¹T⁻²]. Option (c).[span_34](start_span)[span_34](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "The angle of 1' (minute of arc) in radian is nearly equal to: [NEET 2020 Re-NEET][span_35](start_span)[span_35](end_span)",
+      options: ["4.85 × 10⁻⁴ rad", "4.80 × 10⁻⁶ rad", "1.75 × 10⁻² rad", "2.91 × 10⁻⁴ rad"],
+      correctIndex: 3,
+      explanation: "1' = (1/60)° = (1/60) × (π/180) rad = 2.91 × 10⁻⁴ rad. Option (d).[span_36](start_span)[span_36](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "Dimensions of resistance in an electrical circuit, in terms of M, L, T, and current I, would be:[span_37](start_span)[span_37](end_span)",
+      options: ["[ML²T⁻²]", "[ML²T⁻¹I⁻¹]", ["[ML²T⁻³I⁻²]", "[ML²T⁻³I⁻¹]"],
+      correctIndex: 2,
+      explanation: "V = W/q = [ML²T⁻²]/[It] = [ML²T⁻³I⁻¹]. R = V/I = [ML²T⁻³I⁻²]. Option (c).[span_38](start_span)[span_38](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Units and Measurements",
+      question: "The dimensions of (μ₀ε₀)⁻¹/² are: [NEET 2012 Mains][span_39](start_span)[span_39](end_span)",
+      options: ["[L¹/²T⁻¹/²]", "[L⁻¹T]", "[LT⁻¹]", "[L¹/²T¹/²]"],
+      correctIndex: 2,
+      explanation: "(μ₀ε₀)⁻¹/² represents the speed of light c, which has dimensions [LT⁻¹]. Option (c).[span_40](start_span)[span_40](end_span)"
+    }
+  ];
+
+  let currentList = [];
+  let currentIdx = 0;
+  let score = 0;
+
+  // Initialize Subject Selector
+  function init() {
+    const subjects = [...new Set(questionBank.map(item => item.subject))];
+    const subDrop = document.getElementById("subDrop");
+    subjects.forEach(sub => {
+      const opt = document.createElement("option");
+      opt.value = sub;
+      opt.textContent = sub;
+      subDrop.appendChild(opt);
+    });
+  }
+
+  function handleSubjectChange() {
+    const chosenSub = document.getElementById("subDrop").value;
+    const chapDrop = document.getElementById("chapDrop");
+    const startBtn = document.getElementById("startBtn");
+
+    chapDrop.innerHTML = '<option value="">-- Choose Chapter --</option>';
+    startBtn.disabled = true;
+
+    if (!chosenSub) {
+      chapDrop.disabled = true;
+      return;
+    }
+
+    const chapters = [...new Set(questionBank.filter(q => q.subject === chosenSub).map(q => q.chapter))];
+    chapters.forEach(chap => {
+      const opt = document.createElement("option");
+      opt.value = chap;
+      opt.textContent = chap;
+      chapDrop.appendChild(opt);
+    });
+    chapDrop.disabled = false;
+  }
+
+  function handleChapterChange() {
+    const chosenChap = document.getElementById("chapDrop").value;
+    document.getElementById("startBtn").disabled = !chosenChap;
+  }
+
+  function startPractice() {
+    const sub = document.getElementById("subDrop").value;
+    const chap = document.getElementById("chapDrop").value;
+
+    currentList = questionBank.filter(q => q.subject === sub && q.chapter === chap);
+    currentIdx = 0;
+    score = 0;
+
+    document.getElementById("selectorCard").style.display = "none";
+    document.getElementById("practiceCard").style.display = "block";
+    document.getElementById("chapterBadge").textContent = `${sub} • ${chap}`;
+    document.getElementById("scoreCounter").textContent = `Score: 0`;
+
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = currentList[currentIdx];
+    document.getElementById("counterText").textContent = `Question ${currentIdx + 1} of ${currentList.length}`;
+    document.getElementById("questionText").textContent = q.question;
+    
+    const optBox = document.getElementById("optionsBox");
+    optBox.innerHTML = "";
+    
+    const expBox = document.getElementById("explanationBox");
+    expBox.className = "exp-box";
+    expBox.textContent = "";
+    document.getElementById("nextBtn").style.display = "none";
+
+    q.options.forEach((optText, index) => {
+      const btn = document.createElement("button");
+      btn.className = "opt-btn";
+      btn.textContent = `(${String.fromCharCode(97 + index)}) ${optText}`;
+      btn.onclick = () => checkChoice(index);
+      optBox.appendChild(btn);
+    });
+  }
+
+  function checkChoice(pickedIdx) {
+    const q = currentList[currentIdx];
+    const allButtons = document.querySelectorAll(".opt-btn");
+    allButtons.forEach(b => b.disabled = true);
+
+    const expBox = document.getElementById("explanationBox");
+
+    if (pickedIdx === q.correctIndex) {
+      score++;
+      document.getElementById("scoreCounter").textContent = `Score: ${score}`;
+      allButtons[pickedIdx].classList.add("correct");
+      expBox.className = "exp-box correct show";
+      expBox.innerHTML = `<strong>✓ Correct!</strong><br>${q.explanation}`;
+    } else {
+      allButtons[pickedIdx].classList.add("wrong");
+      allButtons[q.correctIndex].classList.add("correct");
+      expBox.className = "exp-box wrong show";
+      expBox.innerHTML = `<strong>✗ Incorrect!</strong><br>${q.explanation}`;
+    }
+
+    document.getElementById("nextBtn").style.display = "block";
+  }
+
+  function goNext() {
+    currentIdx++;
+    if (currentIdx < currentList.length) {
+      renderQuestion();
+    } else {
+      alert(`Chapter practice complete!\nFinal Score: ${score} / ${currentList.length}`);
+      backToSelection();
+    }
+  }
+
+  function backToSelection() {
+    document.getElementById("practiceCard").style.display = "none";
+    document.getElementById("selectorCard").style.display = "block";
+  }
+
+  init();
+</script>
+</body>
+</html>
+

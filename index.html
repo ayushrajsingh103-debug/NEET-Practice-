@@ -98,7 +98,128 @@
 
 <script>
   // QUESTIONS DATA EXTRACTED FROM YOUR PDF
-  const questionBank = [
+  const questionBank = [    // --- CHAPTER 2: MOTION IN A STRAIGHT LINE ---
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A man goes 20 m towards north, then 30 m towards east. His displacement is:[span_14](start_span)[span_14](end_span)",
+      options: ["37 m", "36 m", "40 m", "38 m"],
+      correctIndex: 1,
+      explanation: "Displacement = √(20² + 30²) = √(400 + 900) = √1300 ≈ 36.05 m. Option (b).[span_15](start_span)[span_15](end_span)[span_16](start_span)[span_16](end_span)"
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "An aeroplane flies 400 m north and 300 m south and then flies 1200 m upwards. The net displacement is:[span_17](start_span)[span_17](end_span)",
+      options: ["1200 m", "1300 m", "1400 m", "1500 m"],
+      correctIndex: 0,
+      explanation: "Net north-south displacement = 400 - 300 = 100 m[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span). Total displacement = √(100² + 1200²) = √(1450000) ≈ 1204 m ≈ 1200 m. Option (a)[span_20](start_span)[span_20](end_span)[span_21](start_span)[span_21](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "An athlete completes one round of a circular track of radius R in 80 sec. What will be his displacement at the end of 4 min 60 second?[span_22](start_span)[span_22](end_span)",
+      options: ["2πR", "3πR", "√2 R", "Zero"],
+      correctIndex: 2,
+      explanation: "Total time = 300 s. Number of rounds = 300/80 = 3.75 rounds. After 3.75 rounds, the position is perpendicular on the circle (quarter away): Displacement = √(R² + R²) = √2 R. Option (c)[span_23](start_span)[span_23](end_span)[span_24](start_span)[span_24](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "The displacement of a particle is given by x = (t - 2)² where x is in metre and t in second. The distance covered by the particle in first 4 seconds is:[span_25](start_span)[span_25](end_span)",
+      options: ["4 m", "8 m", "12 m", "16 m"],
+      correctIndex: 1,
+      explanation: "v = dx/dt = 2(t - 2). At t=0, v=-4; at t=2, v=0; at t=4, v=4[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span). Distance = area of the two triangles = 4 + 4 = 8 m. Option (b)[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A truck travels a distance A to B at a speed of 40 km/h and returns to A at a speed of 50 km/h. What is the average velocity of the whole journey?[span_30](start_span)[span_30](end_span)",
+      options: ["34.5 km/h", "Zero", "35 km/hr", "40 km/hr"],
+      correctIndex: 1,
+      explanation: "Since the truck returns to the starting point A, total displacement = 0[span_31](start_span)[span_31](end_span)[span_32](start_span)[span_32](end_span)[span_33](start_span)[span_33](end_span). Hence, average velocity = 0. Option (b)[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span)[span_36](start_span)[span_36](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A car travels half the distance with constant velocity of 40 km/h and the remaining half with a constant velocity of 80 km/h. The average velocity of the car is:[span_37](start_span)[span_37](end_span)",
+      options: ["32 km/hr", "53.3 km/hr", "43.2 km/hr", "42 km/hr"],
+      correctIndex: 1,
+      explanation: "v_avg = 2v₁v₂ / (v₁ + v₂) = 2(40)(80) / (40 + 80) = 6400 / 120 = 53.3 km/h. Option (b)[span_38](start_span)[span_38](end_span)[span_39](start_span)[span_39](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A particle is moving eastward with a velocity of 5 m/s. In 10 seconds, the velocity changes to 5 m/s northward. The average acceleration in this time is:[span_40](start_span)[span_40](end_span)",
+      options: ["Zero", "1/2 m/s² (towards north-east)", "1/√2 m/s² (towards north-east)", "1/√2 m/s² (towards north-west)"],
+      correctIndex: 3,
+      explanation: "|Δv| = √(5² + 5²) = 5√2 m/s pointing north-west[span_41](start_span)[span_41](end_span). a_avg = (5√2)/10 = 1/√2 m/s² (towards north-west). Option (d)[span_42](start_span)[span_42](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A ball thrown vertically upward with a speed of 19.6 m/s from the top of a tower returns to the earth in 6 second. What is the height of the tower?[span_43](start_span)[span_43](end_span)",
+      options: ["40 m", "58.8 m", "50 m", "70 m"],
+      correctIndex: 1,
+      explanation: "Using S = ut + ½gt² with upward positive: -h = 19.6(6) - ½(9.8)(6)² = 117.6 - 176.4 = -58.8 m => h = 58.8 m. Option (b)[span_44](start_span)[span_44](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A car moving with a velocity of 10 m/s can be stopped by constant force F in 20 m. If the velocity is 30 m/s, it can be stopped in:[span_45](start_span)[span_45](end_span)",
+      options: ["100 m", "90 m", "180 m", "160 m"],
+      correctIndex: 2,
+      explanation: "Stopping distance s ∝ u²[span_46](start_span)[span_46](end_span). Since speed triples (30/10 = 3), distance increases by 3² = 9 times. s = 20 × 9 = 180 m. Option (c)[span_47](start_span)[span_47](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A splash is heard 3 seconds after a stone is dropped into a well of depth 20 m. The velocity of sound is (g = 10 m/s²):[span_48](start_span)[span_48](end_span)[span_49](start_span)[span_49](end_span)",
+      options: ["18 m/s", "28 m/s", "20 m/s", "19 m/s"],
+      correctIndex: 2,
+      explanation: "Time to fall t₁ = √(2h/g) = √(40/10) = 2 s[span_50](start_span)[span_50](end_span). Time for sound to return = 3 - 2 = 1 s[span_51](start_span)[span_51](end_span). v_sound = 20 m / 1 s = 20 m/s. Option (c)[span_52](start_span)[span_52](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "The numerical ratio of distance to displacement is:[span_53](start_span)[span_53](end_span)",
+      options: ["Always equal to one", "Always less than one", "Always greater than one", "Equal to or more than one"],
+      correctIndex: 3,
+      explanation: "Distance is always greater than or equal to the magnitude of displacement[span_54](start_span)[span_54](end_span). Hence, Distance / Displacement ≥ 1. Option (d)[span_55](start_span)[span_55](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A bullet fired into a fixed target loses half of its velocity after penetrating 4 cm. How much further it will penetrate before coming to rest?[span_56](start_span)[span_56](end_span)[span_57](start_span)[span_57](end_span)",
+      options: ["0.2 cm", "5 cm", "3 cm", "1.33 cm"],
+      correctIndex: 3,
+      explanation: "Further distance s' = s / (n² - 1) = 4 / (2² - 1) = 4/3 = 1.33 cm. Option (d)[span_58](start_span)[span_58](end_span)[span_59](start_span)[span_59](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "The x and y coordinates of a particle at any time are x = 5t - 2t² and y = 10t. The acceleration of the particle at t = 2 s is: [NEET 2017][span_60](start_span)[span_60](end_span)",
+      options: ["5 m/s²", "-4 m/s²", "-8 m/s²", "0"],
+      correctIndex: 1,
+      explanation: "v_x = 5 - 4t, a_x = -4 m/s²; v_y = 10, a_y = 0[span_61](start_span)[span_61](end_span). Net acceleration a = -4 m/s². Option (b)[span_62](start_span)[span_62](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "Two cars P and Q start from a point at the same time and positions are X_p(t) = at + bt² and X_q(t) = ft - t². At what time do they have the same velocity? [NEET 2016][span_63](start_span)[span_63](end_span)",
+      options: ["(a + f) / 2(1 + b)", "(f - a) / 2(1 + b)", "(a - f) / (1 + b)", "(a + 1) / 2(b - 1)"],
+      correctIndex: 1,
+      explanation: "v_p = a + 2bt, v_q = f - 2t[span_64](start_span)[span_64](end_span). Equating them: a + 2bt = f - 2t => 2t(1 + b) = f - a => t = (f - a) / 2(1 + b). Option (b)[span_65](start_span)[span_65](end_span)."
+    },
+    {
+      subject: "Physics",
+      chapter: "Motion in a Straight Line",
+      question: "A stone falls freely under gravity. It covers distances h₁, h₂, and h₃ in the first 5 s, the next 5 s, and the next 5 s respectively. The relation between them is: [NEET 2013][span_66](start_span)[span_66](end_span)",
+      options: ["h₁ = h₂ = h₃", "h₁ = 2h₂ = 3h₃", "h₁ = h₂/3 = h₃/5", "h₂ = 3h₁ and h₃ = 3h₂"],
+      correctIndex: 2,
+      explanation: "Distances fallen in equal successive time intervals from rest follow Galileo's odd numbers ratio 1 : 3 : 5[span_67](start_span)[span_67](end_span)[span_68](start_span)[span_68](end_span). Thus h₁ : h₂ : h₃ = 1 : 3 : 5 => h₁ = h₂/3 = h₃/5. Option (c)[span_69](start_span)[span_69](end_span)."
+    },
+    
     {
       subject: "Physics",
       chapter: "Units and Measurements",
